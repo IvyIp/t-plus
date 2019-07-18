@@ -5,10 +5,12 @@ window.onload = function() {
 
 function init() {
   let twitterBtn = document.getElementById('twitter-donwload-btn');
-  let fbBtn = document.getElementById('fb-donwload-btn');
+  let keyCode = document.getElementById('key-code');
+  //let fbBtn = document.getElementById('fb-donwload-btn');
   twitterBtn.focus();
-  twitterBtn.addEventListener('keydown', ()=>{
+  twitterBtn.addEventListener('keydown', (e)=>{
     let url = 'https://mobile.twitter.com/kaios.webapp';
+    keyCode.textContent = e.key;
     console.log('app url:' + url);
     if (navigator.mozApps) {
       var request = navigator.mozApps.install(url);
