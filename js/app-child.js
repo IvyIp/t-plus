@@ -28,6 +28,11 @@ function installapp (url, type) {
   };
 }
 
+function receiveMessage (event) {
+  console.log('pizza t-1:' + event.origin + ':' + event.data);
+  event.source.postMessage("Roger that!!", event.origin);
+}
+
 function init() {
   let twitterBtn = document.getElementById('twitter-donwload-btn');
   let pakApp = document.getElementById('pakApp');
@@ -51,6 +56,7 @@ function init() {
     }
   });
 
+  window.addEventListener('message', receiveMessage, false);
   window.addEventListener('focus', (e)=>{
     keyCode.textContent = 'this page gets focus!!';
   });
