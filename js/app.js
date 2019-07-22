@@ -7,7 +7,8 @@ function init() {
   let twitterBtn = document.getElementById('twitter-donwload-btn');
   let keyCode = document.getElementById('key-code');
   //let fbBtn = document.getElementById('fb-donwload-btn');
-  twitterBtn.focus();
+  //twitterBtn.focus();
+  document.getElementById('app-detail-page').focus();
   twitterBtn.addEventListener('keydown', (e)=>{
     let url = 'https://mobile.twitter.com/kaios.webapp';
     keyCode.textContent = e.key;
