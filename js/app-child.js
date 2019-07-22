@@ -6,6 +6,7 @@ const HOSTED = 1;
 const PACKAGED = 3;
 
 function installapp (url, type) {
+  let keyCode = document.getElementById('key-code');
   var request;
   if (!navigator.mozApps) {
     console.log('not supported!!!');
@@ -18,12 +19,12 @@ function installapp (url, type) {
   }
   request.onsuccess = function() {
     console.log('app ok');
-    keyCode.textContent = e.key + 'app ok';
+    keyCode.textContent = url + 'app ok';
   };
 
   request.onerror = function() {
     console.log('app error');
-    keyCode.textContent = e.key + 'app error';
+    keyCode.textContent = url + 'app error';
   };
 }
 
@@ -33,7 +34,6 @@ function init() {
 
   let pkAppUrl =
     'https://api.stage.kaiostech.com/apps/manifest/lj6skNdORZPHqWfrqSwY';
-  let keyCode = document.getElementById('key-code');
   let twUrl = 'https://mobile.twitter.com/kaios.webapp';
   window.addEventListener('keydown', (e)=>{
     switch (e.key) {
