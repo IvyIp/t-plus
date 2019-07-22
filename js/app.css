@@ -1,12 +1,12 @@
-#twitter-donwload-btn,
+button,
 #key-code {
   margin: 30px;
   height: 30px;
-  width: 100px;
+  width: auto;
   background-color: #fff;
 }
 
-#twitter-donwload-btn:focus {
+button:focus {
   background-color: #000;
   color: #fff;
 }

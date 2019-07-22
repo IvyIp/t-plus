@@ -2,35 +2,52 @@
 window.onload = function() {
   init();
 };
+const HOSTED = 1;
+const PACKAGED = 3;
+
+function installapp (url, type) {
+  var request;
+  if (!navigator.mozApps) {
+    console.log('not supported!!!');
+    return;
+  }
+  if (type === HOSTED) {
+    request = navigator.mozApps.install(url);
+  } else {
+    request = navigator.mozApps.installPackage(url);
+  }
+  request.onsuccess = function() {
+    console.log('app ok');
+    keyCode.textContent = e.key + 'app ok';
+  };
+
+  request.onerror = function() {
+    console.log('app error');
+    keyCode.textContent = e.key + 'app error';
+  };
+}
 
 function init() {
   let twitterBtn = document.getElementById('twitter-donwload-btn');
-  let keyCode = document.getElementById('key-code');
-  //let fbBtn = document.getElementById('fb-donwload-btn');
-  twitterBtn.focus();
-  twitterBtn.addEventListener('keydown', (e)=>{
-    let url = 'https://mobile.twitter.com/kaios.webapp';
-    console.log('app url:' + url);
-    if (navigator.mozApps) {
-      var request = navigator.mozApps.install(url);
-      request.onsuccess = function() {
-        console.log('app ok');
-        keyCode.textContent = e.key + 'app ok';
-      };
+  let pakApp = document.getElementById('pakApp');
 
-      request.onerror = function() {
-        console.log('app error');
-        keyCode.textContent = e.key + 'app error';
-      };
-    }else {
-      keyCode.textContent = e.key;
+  let pkAppUrl =
+    'https://api.stage.kaiostech.com/apps/manifest/lj6skNdORZPHqWfrqSwY';
+  let keyCode = document.getElementById('key-code');
+  let twUrl = 'https://mobile.twitter.com/kaios.webapp';
+  window.addEventListener('keydown', (e)=>{
+    switch (e.key) {
+      case '1':
+        twitterBtn.focus();
+        installapp(twUrl, e.key);
+        break;
+      case '3':
+        pakApp.focus();
+        installapp(pkAppUrl, e.key);
+        break;
+      default:
+        keyCode.textContent = e.key;
+        break;
     }
   });
-
-  /*
-  fbBtn.addEventListener('keydown', ()=>{
-    console.log('pizza~~1');
-    let url = 'https://api.kaiostech.com/apps/manifest/oRD8oeYmeYg4fLIwkQPH';
-  });
-  */
 }
