@@ -51,7 +51,7 @@ function init() {
     }
   });
 
-  window.addEventListener('keydown', (e)=>{
+  window.addEventListener('focus', (e)=>{
     keyCode.textContent = 'this page gets focus!!';
   });
 }
