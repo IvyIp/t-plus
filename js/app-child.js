@@ -4,9 +4,9 @@ window.onload = function() {
 };
 const HOSTED = 1;
 const PACKAGED = 3;
+let keyCode = document.getElementById('key-code');
 
 function installapp (url, type) {
-  let keyCode = document.getElementById('key-code');
   var request;
   if (!navigator.mozApps) {
     console.log('not supported!!!');
@@ -49,5 +49,9 @@ function init() {
         keyCode.textContent = e.key;
         break;
     }
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    keyCode.textContent = 'this page gets focus!!';
   });
 }
