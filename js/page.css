@@ -57,6 +57,11 @@ body {
   position: relative;
   margin: auto;
   background-color:#fff;
+  outline: 0;
+}
+
+.brick:focus {
+  height: 80px;
 }
 
 .Page > .brick {
