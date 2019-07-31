@@ -39,7 +39,8 @@ function updateUI(appInfo) {
   appName.textContent = appInfo.name;
   appDesc.textContent = appInfo.description;
   let iconIndex = Object.keys(appInfo.icons)[0];
-  appIcon.src = appInfo.bgs[iconIndex];
+  appIcon.src = appInfo.icons[iconIndex];
+
   let bgIndex = Object.keys(appInfo.bgs)[0];
   let bgSrc = appInfo.bgs[bgIndex];
   brick.style = "background-image:url('" + bgSrc + "')";
