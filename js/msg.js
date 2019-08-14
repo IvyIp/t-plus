@@ -11,9 +11,9 @@ function receiveMessage (event) {
   switch (message.cmd) {
     case 'checkFocus':
       if (focusCheck) {
-        event.source.postMessage({'cmd': 'ready'}, event.origin);
+        sourceWindow.postMessage({'cmd': 'ready'}, sourceOrign);
       } else {
-        event.source.postMessage({'cmd': 'waiting'}, event.origin);
+        sourceWindow.postMessage({'cmd': 'waiting'}, sourceOrign);
       }
       break;
     case 'showInfo':
@@ -26,6 +26,10 @@ window.onload = function() {
   let appDesc = document.getElementById('app-desc');
   appDesc.addEventListener('focus', (e) =>{
     focusCheck = true;
+    if (sourceWindow) {
+      console.log('get focus !!');
+      sourceWindow.postMessage({'cmd': 'ready'}, sourceOrign);
+    }
   }, false);
 
   appDesc.addEventListener('blur', (e) =>{
