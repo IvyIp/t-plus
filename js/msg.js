@@ -1,15 +1,37 @@
 var sourceWindow,
-sourceOrign;
+sourceOrign,
+focusCheck = false;
 function receiveMessage (event) {
   console.log('get message:' + event.origin + ':'
    + JSON.stringify(event.data));
-  updateUI(event.data);
+  let message = event.data;
+
   sourceWindow = event.source;
   sourceOrign = event.origin;
-  //event.source.postMessage("Roger that!!", event.origin);
+  switch (message.cmd) {
+    case 'checkFocus':
+      if (focusCheck) {
+        event.source.postMessage({'cmd': 'ready'}, event.origin);
+      } else {
+        event.source.postMessage({'cmd': 'waiting'}, event.origin);
+      }
+      break;
+    case 'showInfo':
+      updateUI(message.app);
+      break;
+  }
 }
 
 window.onload = function() {
+  let appDesc = document.getElementById('app-desc');
+  appDesc.addEventListener('focus', (e) =>{
+    focusCheck = true;
+  }, false);
+
+  appDesc.addEventListener('blur', (e) =>{
+    focusCheck = false;
+  }, false);
+
   window.addEventListener('message', receiveMessage, false);
   window.addEventListener('keydown', (e)=>{
     console.log('remote:' + e.key);
@@ -18,7 +40,7 @@ window.onload = function() {
       case 'Backspace':
       case 'Escape':
         if (sourceWindow) {
-          sourceWindow.postMessage('closeMe', sourceOrign);
+          sourceWindow.postMessage({'cmd': 'closeMe'}, sourceOrign);
         }
         e.stopPropagation();
         e.preventDefault();
@@ -27,6 +49,8 @@ window.onload = function() {
         break;
     }
   });
+
+  appDesc.focus();
 };
 
 function updateUI(appInfo) {
