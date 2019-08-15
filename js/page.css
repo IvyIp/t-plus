@@ -2,7 +2,7 @@ body {
  margin: 0;
  padding: 0;
  width: 240px;
- height: 280px;
+ height: 294px;
  font-size: 10px;
 }
 
@@ -277,3 +277,54 @@ body {
   }
 }
 
+
+#soft-key{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 240px;
+  height: 30px;
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#soft-key>div{
+  width: 33.33333%;
+  line-height: 30px;
+}
+
+#soft-key .left{
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+#soft-key .center{
+  text-align: center;
+}
+
+#soft-key .right{
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+#progress{
+  width: 100%;
+}
+
+#progress>.bar{
+  height: 4px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+}
+
+#progress>.bar>.active{
+  content: ' ';
+  height: 100%;
+  width: 0;
+  background: #FFFFFF;
+  display: inherit;
+  transition: 0.5s;
+  border-radius: 2px;
+}
